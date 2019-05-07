@@ -1,0 +1,7 @@
+# Run sudo command on remote ssh terminal
+ ssh -t user@host "command without sudo prefix"
+ 
+# SCP
+ -r recursive copy
+ -c cipher (arfour aka RC4 is the fastest, but has vulnerabilities)
+ -z compression
