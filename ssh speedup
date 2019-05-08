@@ -5,3 +5,28 @@
  -r recursive copy
  -c cipher (arfour aka RC4 is the fastest, but has vulnerabilities)
  -z compression
+ -p permission preservation
+
+# RSYNC a smarter option
+ -a recursive copy with permission preservation
+ -H hard links preservation
+ -A ACLs
+ -X extended attributes (including security)
+ --progress visualisation
+ --dryrun rehearsal
+ -e ssh options within ""(for eg "ssh -p 1022")
+ 
+ ## DD duplicating disk
+  - dd if=/dev/sda | ssh user@host "dd of=/dev/sda"
+  
+ ## speed up
+  - ssh -o PreferredAuthentication = pubkey user@host - forces PK Auth
+  - useDNS = No (@sshd_config)
+  - ControlMaster <------------- use same encrypted tunnel for multiple ssh connections
+    ControlPath ~/.ssh/%r@%h:%p
+  - openssl speed aes rc4 blowfish ... tests the speed for each cipher
+  - sudo sshd -T | grep ciphers ... lists all the supported ciphers 
+  -c for Cipher forcing
+  -C for Compression
+  -time ssh ... will time the connection
+ 
